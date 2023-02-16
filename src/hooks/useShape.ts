@@ -23,16 +23,21 @@ export default function useShape(ref: RefObject<HTMLCanvasElement>) {
 
     const rectangle = new scope.Path.Rectangle(
       new scope.Point(Math.random() * 100, Math.random() * 100),
-      new scope.Size(100, 100)
+      new scope.Size(200, 100)
     );
 
     rectangle.fillColor = new Paper.Color(0, 0, 0);
 
+    rectangle.onMouseEnter = () => {
+      rectangle.fillColor = new Paper.Color(100, 0, 0);
+      console.log(rectangle.bounds);
+    };
+
+    rectangle.onMouseLeave = () => {
+      rectangle.fillColor = new Paper.Color(0, 0, 0);
+    };
     rectangle.onMouseDrag = (event: paper.MouseEvent) => {
-      rectangle.position = new scope.Point(
-        rectangle.position.x + event.delta.x,
-        rectangle.position.y + event.delta.y
-      );
+      rectangle.position = event.point;
     };
 
     scope.project.activeLayer.addChild(rectangle);
