@@ -5,7 +5,7 @@ import usePaper from "./hooks/useShape";
 function App() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const { createRectangle } = usePaper(canvasRef);
+  const { createRectangle, createText } = usePaper(canvasRef);
 
   return (
     <div>
@@ -18,6 +18,7 @@ function App() {
           ref={canvasRef}
         ></canvas>
         <button onClick={() => createRectangle({})}>Create a Rectangle</button>
+        <button onClick={() => createText({})}>Create a Text</button>
       </main>
     </div>
   );

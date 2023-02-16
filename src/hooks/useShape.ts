@@ -18,6 +18,24 @@ export default function useShape(ref: RefObject<HTMLCanvasElement>) {
 
   const createCircle = (config: any) => {};
 
+  const createText = (config: any) => {
+    const text = new Paper.PointText({
+      point: new Paper.Point(100, 100),
+      content: "Hello, world!",
+      fillColor: "black",
+      fontSize: 24,
+      fontWeight: "bold",
+    });
+
+    text.onMouseDrag = (event: paper.MouseEvent) => {
+      text.position = event.point;
+    };
+
+    scope.project.activeLayer.addChild(text);
+
+    scope.view.update();
+  };
+
   const createRectangle = (config: RectangleFactoryConfig) => {
     if (!scope) return;
 
@@ -30,12 +48,12 @@ export default function useShape(ref: RefObject<HTMLCanvasElement>) {
 
     rectangle.onMouseEnter = () => {
       rectangle.fillColor = new Paper.Color(100, 0, 0);
-      console.log(rectangle.bounds);
     };
 
     rectangle.onMouseLeave = () => {
       rectangle.fillColor = new Paper.Color(0, 0, 0);
     };
+
     rectangle.onMouseDrag = (event: paper.MouseEvent) => {
       rectangle.position = event.point;
     };
@@ -45,5 +63,5 @@ export default function useShape(ref: RefObject<HTMLCanvasElement>) {
     scope.view.update();
   };
 
-  return { createCircle, createRectangle };
+  return { createCircle, createRectangle, createText };
 }
