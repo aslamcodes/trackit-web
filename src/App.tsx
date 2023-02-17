@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState } from "react";
-import * as Paper from "paper";
+import { useRef } from "react";
 import usePaper from "./hooks/useShape";
 
 function App() {
